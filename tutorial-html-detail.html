@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial HTML untuk Pemula - Pusat Solusi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Tutorial HTML untuk pemula: penjelasan tag, struktur, dan contoh kode agar kamu cepat paham membangun halaman web dasar.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #0d9488; /* Teal Modern (Tailwind Teal 600) */
+            --color-primary-dark: #0f766e; /* Teal lebih gelap (Tailwind Teal 700) */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .header-bg {
+             background-color: #2a3d45;
+        }
+        .text-brand { color: var(--color-primary); }
+        .bg-brand { background-color: var(--color-primary); }
+        .hover-bg-brand-dark:hover { background-color: var(--color-primary-dark); }
+        .border-brand { border-color: var(--color-primary); }
+
+        /* Styling for article content */
+        .article-content h2 {
+            font-size: 1.5rem; /* 24px */
+            line-height: 2rem; /* 32px */
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom-width: 1px;
+            border-color: #e5e7eb; /* gray-200 */
+        }
+        .article-content h3 {
+            font-size: 1.25rem; /* 20px */
+            line-height: 1.75rem; /* 28px */
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-content p, .article-content ul, .article-content ol {
+            margin-bottom: 1.25rem;
+            line-height: 1.75;
+            color: #374151; /* gray-700 */
+        }
+        .article-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .article-content a {
+            color: var(--color-primary);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .article-content a:hover {
+            color: var(--color-primary-dark);
+        }
+        .article-content code:not(pre code) {
+            background-color: #e5e7eb; /* gray-200 */
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--color-primary);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #4b5563; /* gray-600 */
+        }
+
+        /* Nav & other styles from template */
+        .nav-link-active { position: relative; color: white; font-weight: 700; }
+        .nav-link-active::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 3px; background-color: var(--color-primary); border-radius: 2px; }
+        .nav-link-hover { position: relative; }
+        .nav-link-hover::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background-color: var(--color-primary); border-radius: 2px; transition: width 0.3s ease-in-out; }
+        .nav-link-hover:hover::after { width: 100%; }
+        #mobile-menu { transition: max-height 0.3s ease-out, opacity 0.3s ease-out; max-height: 0; overflow: hidden; opacity: 0; }
+        #mobile-menu.active { max-height: 500px; opacity: 1; }
+        #ai-chat-window { transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
+        .chat-bubble-ai { background-color: #e5e7eb; color: #1f2937; }
+        .chat-bubble-user { background-color: var(--color-primary); color: white; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="header-bg shadow-md sticky top-0 z-50 backdrop-blur-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-lightbulb text-2xl text-brand"></i>
+                        <span class="text-white text-xl font-bold">Pusat Solusi</span>
+                    </a>
+                    <div class="hidden lg:flex lg:items-center lg:space-x-8 ml-10">
+                        <a href="index.html" class="nav-link-hover text-gray-300 hover:text-white transition duration-150">Home</a>
+                        <a href="tutorial.html" class="nav-link-active">Tutorial Set</a>
+                        <a href="artikel.html" class="nav-link-hover text-gray-300 hover:text-white transition duration-150">Artikel</a>
+                        <a href="project.html" class="nav-link-hover text-gray-300 hover:text-white transition duration-150">Project</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden lg:inline-block bg-brand hover-bg-brand-dark text-white font-bold text-sm px-4 py-2 rounded-full transition duration-300">Join Sekarang</a>
+                    <button class="search-open-btn text-gray-300 hover:text-white focus:outline-none transition-transform duration-200 hover:scale-110" aria-label="Buka pencarian">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    <div class="lg:hidden">
+                        <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="text-gray-300 hover:text-white focus:outline-none transition-transform duration-200 hover:scale-110">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="lg:hidden bg-slate-800/80 backdrop-blur-sm">
+            <a href="index.html" class="block py-3 px-4 text-gray-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out">Home</a>
+            <a href="tutorial.html" class="block py-3 pl-3 pr-4 text-white font-bold bg-slate-700 border-l-4 border-brand">Tutorial Set</a>
+            <a href="artikel.html" class="block py-3 px-4 text-gray-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out">Artikel</a>
+            <a href="project.html" class="block py-3 px-4 text-gray-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out">Project</a>
+            <div class="px-4 py-3">
+                 <a href="#" class="block text-center w-full py-2 px-4 text-sm bg-brand hover-bg-brand-dark text-white font-bold rounded-full transition duration-300">Join Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            
+            <article class="lg:col-span-8 bg-white p-6 sm:p-10 rounded-lg shadow-md">
+                <div class="article-content">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-gray-900">Belajar HTML #02: Apa itu HTML?</h1>
+                    <div class="text-sm text-gray-500 mb-8">
+                        <span>Ditulis oleh <strong>Pusat Solusi</strong></span> | <span>Diperbarui pada <strong>24 September 2025</strong></span>
+                    </div>
+
+                    <p>Selamat datang di seri tutorial HTML dari Pusat Solusi. Pada bagian kedua ini, kita akan berkenalan lebih dalam dengan HTML. Apa sih sebenarnya HTML itu?</p>
+                    
+                    <blockquote>HTML adalah singkatan dari <strong>Hypertext Markup Language</strong>. Sesuai namanya, HTML adalah bahasa markup, bukan bahasa pemrograman. Fungsinya adalah untuk menstrukturkan konten di halaman web.</blockquote>
+
+                    <p>Bayangkan halaman web sebagai sebuah dokumen. HTML-lah yang memberi tahu browser, "ini adalah judul", "ini adalah paragraf", "ini adalah gambar", dan sebagainya. Tanpa HTML, halaman web hanya akan menjadi teks biasa yang tidak terstruktur.</p>
+
+                    <h2>Analogi Kerangka Manusia</h2>
+                    <p>Untuk memahaminya lebih mudah, kita bisa menganalogikan pembuatan website dengan membangun manusia.</p>
+                    <ul>
+                        <li>🦴 <strong>HTML</strong> adalah kerangkanya. Ia memberikan struktur dasar pada tubuh.</li>
+                        <li>🎨 <strong>CSS</strong> adalah kulit, rambut, dan pakaiannya. Ia memberikan tampilan visual dan gaya.</li>
+                        <li>🧠 <strong>JavaScript</strong> adalah otak dan ototnya. Ia memberikan kemampuan untuk bergerak dan berinteraksi.</li>
+                    </ul>
+                    <p>Jadi, HTML adalah fondasi paling dasar dari sebuah website. Semua website yang Anda lihat di internet pasti menggunakan HTML.</p>
+
+                    <h2>Contoh Kode HTML</h2>
+                    <p>Berikut ini adalah contoh kode HTML yang sangat sederhana:</p>
+
+                    <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden my-6">
+                        <div class="bg-gray-700/50 flex items-center justify-between py-2 px-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                                <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                                <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                            </div>
+                            <span class="text-sm text-gray-400">example.html</span>
+                            <button class="copy-code-btn bg-gray-600 hover:bg-gray-500 text-gray-300 text-xs font-semibold py-1 px-3 rounded-md transition-colors duration-200 flex items-center">
+                                <i class="far fa-copy mr-2"></i>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm overflow-x-auto">
+<pre id="code-block"><code class="language-html" style="color: #d1d5db;">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;title&gt;Judul Halaman&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Ini adalah Judul Utama&lt;/h1&gt;
+    &lt;p&gt;Ini adalah sebuah paragraf.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <p>Jangan khawatir jika Anda belum memahaminya. Kita akan membahas setiap bagian dari kode di atas pada tutorial-tutorial berikutnya. Intinya adalah, kode tersebut memberitahu browser cara menampilkan konten di dalamnya.</p>
+                </div>
+
+                <div class="mt-10 pt-6 border-t flex justify-between">
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Sebelumnya
+                    </a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-brand hover-bg-brand-dark">
+                        Berikutnya
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="lg:col-span-4 mt-12 lg:mt-0">
+                <div class="sticky top-24 space-y-8">
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-gray-800"><i class="fas fa-list-ol text-brand mr-3"></i>Daftar Isi Tutorial</h3>
+                        <ol class="space-y-3 text-gray-600 text-sm">
+                            <li><a href="#" class="flex items-center hover:text-brand transition-colors"><span class="mr-2 w-5 text-center text-gray-400">1.</span>Persiapan Belajar</a></li>
+                            <li class="bg-teal-50 rounded-md -ml-2 p-2"><a href="#" class="flex items-center font-bold text-brand"><span class="mr-2 w-5 text-center">2.</span>Apa itu HTML?</a></li>
+                            <li><a href="#" class="flex items-center hover:text-brand transition-colors"><span class="mr-2 w-5 text-center text-gray-400">3.</span>Struktur Dasar</a></li>
+                            <li><a href="#" class="flex items-center hover:text-brand transition-colors"><span class="mr-2 w-5 text-center text-gray-400">4.</span>Tag, Elemen, & Atribut</a></li>
+                            <li><a href="#" class="flex items-center hover:text-brand transition-colors"><span class="mr-2 w-5 text-center text-gray-400">5.</span>Membuat Paragraf</a></li>
+                            <li><a href="#" class="flex items-center hover:text-brand transition-colors"><span class="mr-2 w-5 text-center text-gray-400">6.</span>Membuat Heading</a></li>
+                            <li><a href="#" class="flex items-center hover:text-brand transition-colors"><span class="mr-2 w-5 text-center text-gray-400">7.</span>...dan lainnya</a></li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-gray-800"><i class="fas fa-fire text-orange-500 mr-3"></i>Artikel Terbaru</h3>
+                        <div class="space-y-4">
+                            <a href="#" class="group flex space-x-4">
+                                <img src="https://placehold.co/100x100/e74c3c/ffffff?text=L" alt="Laravel" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">
+                                <div class="flex-grow">
+                                    <h4 class="font-semibold text-gray-800 group-hover:text-brand leading-tight">Tutorial Laravel 11 untuk Pemula: Bikin CRUD!</h4>
+                                    <p class="text-xs text-gray-500 mt-1">20 Sep 2025</p>
+                                </div>
+                            </a>
+                            <a href="#" class="group flex space-x-4">
+                                <img src="https://placehold.co/100x100/2980b9/ffffff?text=Go" alt="Golang" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">
+                                <div class="flex-grow">
+                                    <h4 class="font-semibold text-gray-800 group-hover:text-brand leading-tight">Notifikasi Realtime dengan Redis Pub/Sub di Golang</h4>
+                                    <p class="text-xs text-gray-500 mt-1">15 Sep 2025</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="header-bg text-gray-300 mt-16">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h4 class="font-bold text-lg mb-3 text-white">Tentang Pusat Solusi</h4>
+                    <p class="text-sm">Blog yang membahas seputar dunia pemrograman dan teknologi, disajikan dengan bahasa yang mudah dipahami oleh pemula.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-3 text-white">Navigasi</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-white">Kontak</a></li>
+                        <li><a href="#" class="hover:text-white">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-3 text-white">Ikuti Kami</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-sm">
+                <p>&copy; 2025 Pusat Solusi. Semua hak cipta dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="search-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-lg w-11/12 max-w-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">Cari Artikel atau Project</h3>
+                <button id="search-close-button" aria-label="Tutup pencarian" class="text-gray-600 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <form id="search-form">
+                <input id="search-input" type="search" placeholder="Masukkan kata kunci..." class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" />
+                <div class="mt-4 text-right">
+                    <button type="submit" class="bg-brand text-white font-bold px-6 py-2 rounded-md hover-bg-brand-dark transition-colors">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <button id="ai-chat-button" aria-label="Buka AI Chat" class="fixed bottom-6 right-6 bg-brand hover-bg-brand-dark text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110 z-50">
+        <i class="fas fa-robot text-2xl"></i>
+    </button>
+    <div id="ai-chat-window" class="fixed bottom-24 right-6 w-[90vw] max-w-md h-[70vh] max-h-[600px] bg-white rounded-xl shadow-2xl flex flex-col origin-bottom-right transform scale-0 opacity-0 z-50">
+        <div class="header-bg text-white p-4 flex justify-between items-center rounded-t-xl">
+            <div>
+                <h3 class="font-bold text-lg">Asisten AI Pusat Solusi</h3>
+                <p class="text-xs text-gray-300">Didukung oleh Gemini</p>
+            </div>
+            <button id="ai-chat-close-button" aria-label="Tutup AI Chat" class="text-2xl text-gray-300 hover:text-white">&times;</button>
+        </div>
+        <div id="ai-chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4"></div>
+        <form id="ai-chat-form" class="p-4 border-t border-gray-200 flex items-center gap-2">
+            <input id="ai-chat-input" type="text" placeholder="Tanya tentang koding..." class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-teal-500" autocomplete="off">
+            <button type="submit" class="bg-brand text-white w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center hover-bg-brand-dark transition-colors">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // 1. Script untuk toggle menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // 2. Logika untuk Modal Pencarian
+        const openSearchButtons = document.querySelectorAll('.search-open-btn');
+        const closeSearchButton = document.getElementById('search-close-button');
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('search-input');
+        const openModal = () => {
+            if (!searchModal) return;
+            searchModal.classList.remove('hidden');
+            searchModal.classList.add('flex');
+            setTimeout(() => searchInput && searchInput.focus(), 50);
+        };
+        const closeModal = () => {
+            if (!searchModal) return;
+            searchModal.classList.remove('flex');
+            searchModal.classList.add('hidden');
+        };
+        openSearchButtons.forEach(btn => btn.addEventListener('click', openModal));
+        if (closeSearchButton) closeSearchButton.addEventListener('click', closeModal);
+        if (searchModal) searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeModal(); });
+        
+        // 3. Script untuk tombol salin kode
+        const copyButton = document.querySelector('.copy-code-btn');
+        if (copyButton) {
+            const codeBlock = document.getElementById('code-block');
+            copyButton.addEventListener('click', () => {
+                if (codeBlock) {
+                    navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                        const buttonText = copyButton.querySelector('.copy-text');
+                        if(!buttonText) return;
+                        const originalText = buttonText.innerText;
+                        buttonText.innerText = 'Disalin!';
+                        copyButton.classList.add('bg-green-500');
+
+                        setTimeout(() => {
+                            buttonText.innerText = originalText;
+                            copyButton.classList.remove('bg-green-500');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Gagal menyalin kode', err);
+                    });
+                }
+            });
+        }
+
+        // 4. Logika untuk AI Chat
+        const chatButton = document.getElementById('ai-chat-button');
+        const chatWindow = document.getElementById('ai-chat-window');
+        const closeChatButton = document.getElementById('ai-chat-close-button');
+        const chatForm = document.getElementById('ai-chat-form');
+        const chatInput = document.getElementById('ai-chat-input');
+        const messagesContainer = document.getElementById('ai-chat-messages');
+        const toggleChatWindow = () => {
+            const isHidden = chatWindow.classList.contains('scale-0');
+            if (isHidden) {
+                chatWindow.classList.remove('scale-0', 'opacity-0');
+                chatWindow.classList.add('scale-100', 'opacity-100');
+                if(messagesContainer.children.length === 0) {
+                     appendMessage("Ada pertanyaan tentang artikel HTML ini? Tanyakan saja!", "ai");
+                }
+            } else {
+                chatWindow.classList.remove('scale-100', 'opacity-100');
+                chatWindow.classList.add('scale-0', 'opacity-0');
+            }
+        };
+        const appendMessage = (text, sender, isTyping = false) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-xs md:max-w-sm p-3 rounded-2xl ${sender === 'user' ? 'chat-bubble-user rounded-br-lg' : 'chat-bubble-ai rounded-bl-lg'}`;
+            if (isTyping) {
+                bubble.id = 'typing-indicator';
+                bubble.innerHTML = `<div class="flex items-center space-x-1"><span class="block w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: -0.3s;"></span><span class="block w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: -0.15s;"></span><span class="block w-2 h-2 bg-gray-500 rounded-full animate-bounce"></span></div>`;
+            } else {
+                bubble.textContent = text;
+            }
+            wrapper.appendChild(bubble);
+            messagesContainer.appendChild(wrapper);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        };
+        // Simulasi respon AI
+        const getGeminiResponse = (query) => {
+            return new Promise(resolve => setTimeout(() => {
+                const lowerQuery = query.toLowerCase();
+                let response = "Maaf, saya belum paham. Pertanyaan saya terbatas pada artikel tentang HTML ini.";
+                if (lowerQuery.includes("kerangka")) response = "Benar sekali! Analogi HTML sebagai kerangka sangat membantu memahaminya sebagai struktur dasar web.";
+                if (lowerQuery.includes("css")) response = "CSS (Cascading Style Sheets) berfungsi untuk memberi gaya visual, seperti warna, layout, dan font pada 'kerangka' HTML.";
+                resolve(response);
+            }, 1500));
+        };
+        if (chatButton) chatButton.addEventListener('click', toggleChatWindow);
+        if (closeChatButton) closeChatButton.addEventListener('click', toggleChatWindow);
+        if (chatForm) {
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userInput = chatInput.value.trim();
+                if (!userInput) return;
+                appendMessage(userInput, "user");
+                chatInput.value = "";
+                appendMessage("", "ai", true);
+                const aiResponse = await getGeminiResponse(userInput);
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) typingIndicator.parentElement.remove();
+                appendMessage(aiResponse, "ai");
+            });
+        }
+    });
+    </script>
+</body>
+</html>

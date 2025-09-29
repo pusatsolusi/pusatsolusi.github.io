@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel Pemrograman - Pusat Solusi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Kumpulan artikel dan panduan pemrograman dari Pusat Solusi. Tips, tutorial, dan studi kasus untuk pengembang pemula hingga menengah.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #0d9488; /* Teal Modern (Tailwind Teal 600) */
+            --color-primary-dark: #0f766e; /* Teal lebih gelap (Tailwind Teal 700) */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .header-bg {
+             background-color: #2a3d45;
+        }
+        .text-brand { color: var(--color-primary); }
+        .bg-brand { background-color: var(--color-primary); }
+        .hover-bg-brand-dark:hover { background-color: var(--color-primary-dark); }
+        .border-brand { border-color: var(--color-primary); }
+
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link-active { position: relative; color: white; font-weight: 700; }
+        .nav-link-active::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 3px; background-color: var(--color-primary); border-radius: 2px; }
+        .nav-link-hover { position: relative; }
+        .nav-link-hover::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background-color: var(--color-primary); border-radius: 2px; transition: width 0.3s ease-in-out; }
+        .nav-link-hover:hover::after { width: 100%; }
+        #mobile-menu { transition: max-height 0.3s ease-out, opacity 0.3s ease-out; max-height: 0; overflow: hidden; opacity: 0; }
+        #mobile-menu.active { max-height: 500px; opacity: 1; }
+        #ai-chat-window { transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
+        .chat-bubble-ai { background-color: #e5e7eb; color: #1f2937; }
+        .chat-bubble-user { background-color: var(--color-primary); color: white; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="header-bg shadow-md sticky top-0 z-50 backdrop-blur-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-lightbulb text-2xl text-brand"></i>
+                        <span class="text-white text-xl font-bold">Pusat Solusi</span>
+                    </a>
+                    <div class="hidden lg:flex lg:items-center lg:space-x-8 ml-10">
+                        <a href="index.html" class="nav-link-hover text-gray-300 hover:text-white transition duration-150">Home</a>
+                        <a href="tutorial.html" class="nav-link-hover text-gray-300 hover:text-white transition duration-150">Tutorial Set</a>
+                        <a href="artikel.html" class="nav-link-active">Artikel</a>
+                        <a href="project.html" class="nav-link-hover text-gray-300 hover:text-white transition duration-150">Project</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden lg:inline-block bg-brand hover-bg-brand-dark text-white font-bold text-sm px-4 py-2 rounded-full transition duration-300">Join Sekarang</a>
+                    <button class="search-open-btn text-gray-300 hover:text-white focus:outline-none transition-transform duration-200 hover:scale-110" aria-label="Buka pencarian">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    <div class="lg:hidden">
+                        <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="text-gray-300 hover:text-white focus:outline-none transition-transform duration-200 hover:scale-110">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="lg:hidden bg-slate-800/80 backdrop-blur-sm">
+            <a href="index.html" class="block py-3 px-4 text-gray-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out">Home</a>
+            <a href="tutorial.html" class="block py-3 px-4 text-gray-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out">Tutorial Set</a>
+            <a href="artikel.html" class="block py-3 pl-3 pr-4 text-white font-bold bg-slate-700 border-l-4 border-brand">Artikel</a>
+            <a href="project.html" class="block py-3 px-4 text-gray-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out">Project</a>
+            <div class="px-4 py-3">
+                 <a href="#" class="block text-center w-full py-2 px-4 text-sm bg-brand hover-bg-brand-dark text-white font-bold rounded-full transition duration-300">Join Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-16">
+             <span class="text-sm font-bold text-teal-700 bg-teal-100 px-3 py-1 rounded-full">KUMPULAN TULISAN</span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mt-4">Pustaka Artikel</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Jelajahi wawasan, tips, dan panduan mendalam seputar dunia pemrograman dan teknologi dari kami.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
+            <!-- Main Content Area -->
+            <div class="lg:col-span-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Artikel Card 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex flex-col">
+                        <a href="artikel-detail.html">
+                            <img src="https://placehold.co/800x500/e74c3c/ffffff?text=Laravel" alt="Tutorial Laravel 11" class="w-full h-56 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div>
+                                <span class="text-xs font-semibold bg-red-100 text-red-600 px-2 py-1 rounded-full">LARAVEL</span>
+                            </div>
+                           <h3 class="text-xl font-bold my-3 flex-grow">
+                                <a href="artikel-detail.html" class="hover:text-brand">Tutorial Laravel 11 untuk Pemula: Langsung Bisa bikin CRUD!</a>
+                           </h3>
+                            <div class="flex items-center text-sm text-gray-500 mt-auto">
+                                <img src="https://placehold.co/40x40/7f9cf5/ffffff?text=PS" class="w-8 h-8 rounded-full mr-3" alt="Author">
+                                <span>Pusat Solusi • 20 Sep 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Artikel Card 2 -->
+                     <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex flex-col">
+                        <a href="#">
+                            <img src="https://placehold.co/800x500/2980b9/ffffff?text=Go" alt="Redis Pub/Sub" class="w-full h-56 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div>
+                                 <span class="text-xs font-semibold bg-cyan-100 text-cyan-600 px-2 py-1 rounded-full">GOLANG</span>
+                            </div>
+                            <h3 class="text-xl font-bold my-3 flex-grow">
+                                <a href="#" class="hover:text-brand">Sistem Notifikasi Realtime dengan Redis Pub/Sub di Golang</a>
+                            </h3>
+                             <div class="flex items-center text-sm text-gray-500 mt-auto">
+                                <img src="https://placehold.co/40x40/a3bf9f/ffffff?text=AD" class="w-8 h-8 rounded-full mr-3" alt="Author">
+                                <span>Ahmad Dahlan • 15 Sep 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Artikel Card 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex flex-col">
+                        <a href="#">
+                            <img src="https://placehold.co/800x500/8e44ad/ffffff?text=C++" alt="C++ Union" class="w-full h-56 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div>
+                                <span class="text-xs font-semibold bg-blue-100 text-blue-600 px-2 py-1 rounded-full">C++</span>
+                            </div>
+                            <h3 class="text-xl font-bold my-3 flex-grow">
+                                <a href="#" class="hover:text-brand">Belajar C++ #13: Mengenal Tipe Data Union</a>
+                            </h3>
+                            <div class="flex items-center text-sm text-gray-500 mt-auto">
+                                <img src="https://placehold.co/40x40/7f9cf5/ffffff?text=PS" class="w-8 h-8 rounded-full mr-3" alt="Author">
+                                <span>Pusat Solusi • 10 Sep 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Artikel Card 4 -->
+                     <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex flex-col">
+                        <a href="#">
+                            <img src="https://placehold.co/800x500/3498db/ffffff?text=Docker" alt="Docker" class="w-full h-56 object-cover">
+                        </a>
+                        <div class="p-6 flex-grow flex flex-col">
+                             <div>
+                                 <span class="text-xs font-semibold bg-sky-100 text-sky-600 px-2 py-1 rounded-full">DEVOPS</span>
+                            </div>
+                            <h3 class="text-xl font-bold my-3 flex-grow">
+                                <a href="#" class="hover:text-brand">Pengenalan Docker untuk Pemula</a>
+                            </h3>
+                            <div class="flex items-center text-sm text-gray-500 mt-auto">
+                                <img src="https://placehold.co/40x40/f3a683/ffffff?text=BS" class="w-8 h-8 rounded-full mr-3" alt="Author">
+                                <span>Budi Santoso • 05 Sep 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-16 flex justify-center">
+                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            Sebelumnya
+                        </a>
+                        <a href="#" aria-current="page" class="z-10 bg-brand text-white border-brand relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</a>
+                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</a>
+                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden sm:inline-flex relative items-center px-4 py-2 border text-sm font-medium">3</a>
+                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden sm:inline-flex relative items-center px-4 py-2 border text-sm font-medium">8</a>
+                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            Berikutnya
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="lg:col-span-4 mt-16 lg:mt-0">
+                 <div class="sticky top-24 space-y-8">
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-lg mb-4 flex items-center">
+                            <i class="fas fa-folder-open text-brand mr-3"></i> Kategori Populer
+                        </h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-brand group"><span>Web Dev</span> <span class="text-xs text-gray-400 group-hover:text-brand"><i class="fas fa-chevron-right"></i></span></a></li>
+                            <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-brand group"><span>DevOps</span> <span class="text-xs text-gray-400 group-hover:text-brand"><i class="fas fa-chevron-right"></i></span></a></li>
+                            <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-brand group"><span>Backend</span> <span class="text-xs text-gray-400 group-hover:text-brand"><i class="fas fa-chevron-right"></i></span></a></li>
+                            <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-brand group"><span>Tips & Trik</span> <span class="text-xs text-gray-400 group-hover:text-brand"><i class="fas fa-chevron-right"></i></span></a></li>
+                        </ul>
+                    </div>
+
+                     <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-lg mb-4 flex items-center">
+                            <i class="fas fa-fire text-orange-500 mr-3"></i> Paling Banyak Dibaca
+                        </h4>
+                        <div class="space-y-4">
+                            <a href="#" class="flex items-center space-x-4 group">
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-red-100 rounded-lg">
+                                    <i class="fab fa-laravel text-2xl text-red-500"></i>
+                                </div>
+                                <div class="flex-grow">
+                                    <h5 class="font-semibold text-gray-800 group-hover:text-brand leading-tight">Tutorial Laravel 11 untuk Pemula: Langsung Bisa bikin CRUD!</h5>
+                                    <p class="text-xs text-gray-500 mt-1">20 Sep 2025 • baca 22 menit</p>
+                                </div>
+                            </a>
+                             <a href="#" class="flex items-center space-x-4 group">
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-sky-100 rounded-lg">
+                                    <i class="fab fa-docker text-2xl text-sky-500"></i>
+                                </div>
+                                <div class="flex-grow">
+                                    <h5 class="font-semibold text-gray-800 group-hover:text-brand leading-tight">Pengenalan Docker untuk Pemula</h5>
+                                    <p class="text-xs text-gray-500 mt-1">05 Sep 2025 • baca 10 menit</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="header-bg text-gray-300 mt-16">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h4 class="font-bold text-lg mb-3 text-white">Tentang Pusat Solusi</h4>
+                    <p class="text-sm">Blog yang membahas seputar dunia pemrograman dan teknologi, disajikan dengan bahasa yang mudah dipahami oleh pemula.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-3 text-white">Navigasi</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-white">Kontak</a></li>
+                        <li><a href="#" class="hover:text-white">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-3 text-white">Ikuti Kami</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-2xl hover:text-brand transition duration-300"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-sm">
+                <p>&copy; 2025 Pusat Solusi. Semua hak cipta dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-lg w-11/12 max-w-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">Cari Artikel atau Project</h3>
+                <button id="search-close-button" aria-label="Tutup pencarian" class="text-gray-600 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <form id="search-form">
+                <input id="search-input" type="search" placeholder="Masukkan kata kunci..." class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" />
+                <div class="mt-4 text-right">
+                    <button type="submit" class="bg-brand text-white font-bold px-6 py-2 rounded-md hover-bg-brand-dark transition-colors">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- AI Chat -->
+    <button id="ai-chat-button" aria-label="Buka AI Chat" class="fixed bottom-6 right-6 bg-brand hover-bg-brand-dark text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110 z-50">
+        <i class="fas fa-robot text-2xl"></i>
+    </button>
+    <div id="ai-chat-window" class="fixed bottom-24 right-6 w-[90vw] max-w-md h-[70vh] max-h-[600px] bg-white rounded-xl shadow-2xl flex flex-col origin-bottom-right transform scale-0 opacity-0 z-50">
+        <div class="header-bg text-white p-4 flex justify-between items-center rounded-t-xl">
+            <div>
+                <h3 class="font-bold text-lg">Asisten AI Pusat Solusi</h3>
+                <p class="text-xs text-gray-300">Didukung oleh Gemini</p>
+            </div>
+            <button id="ai-chat-close-button" aria-label="Tutup AI Chat" class="text-2xl text-gray-300 hover:text-white">&times;</button>
+        </div>
+        <div id="ai-chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4"></div>
+        <form id="ai-chat-form" class="p-4 border-t border-gray-200 flex items-center gap-2">
+            <input id="ai-chat-input" type="text" placeholder="Tanya tentang artikel..." class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-teal-500" autocomplete="off">
+            <button type="submit" class="bg-brand text-white w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center hover-bg-brand-dark transition-colors">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // 1. Script untuk toggle menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // 2. Logika untuk Modal Pencarian
+        const openSearchButtons = document.querySelectorAll('.search-open-btn');
+        const closeSearchButton = document.getElementById('search-close-button');
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('search-input');
+        const openModal = () => {
+            if (!searchModal) return;
+            searchModal.classList.remove('hidden');
+            searchModal.classList.add('flex');
+            setTimeout(() => searchInput && searchInput.focus(), 50);
+        };
+        const closeModal = () => {
+            if (!searchModal) return;
+            searchModal.classList.remove('flex');
+            searchModal.classList.add('hidden');
+        };
+        openSearchButtons.forEach(btn => btn.addEventListener('click', openModal));
+        if (closeSearchButton) closeSearchButton.addEventListener('click', closeModal);
+        if (searchModal) searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeModal(); });
+
+        // 3. Logika untuk AI Chat
+        const chatButton = document.getElementById('ai-chat-button');
+        const chatWindow = document.getElementById('ai-chat-window');
+        const closeChatButton = document.getElementById('ai-chat-close-button');
+        const chatForm = document.getElementById('ai-chat-form');
+        const chatInput = document.getElementById('ai-chat-input');
+        const messagesContainer = document.getElementById('ai-chat-messages');
+        const toggleChatWindow = () => {
+            const isHidden = chatWindow.classList.contains('scale-0');
+            if (isHidden) {
+                chatWindow.classList.remove('scale-0', 'opacity-0');
+                chatWindow.classList.add('scale-100', 'opacity-100');
+                if(messagesContainer.children.length === 0) {
+                     appendMessage("Ada artikel yang menarik? Tanyakan lebih lanjut di sini!", "ai");
+                }
+            } else {
+                chatWindow.classList.remove('scale-100', 'opacity-100');
+                chatWindow.classList.add('scale-0', 'opacity-0');
+            }
+        };
+        const appendMessage = (text, sender, isTyping = false) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-xs md:max-w-sm p-3 rounded-2xl ${sender === 'user' ? 'chat-bubble-user rounded-br-lg' : 'chat-bubble-ai rounded-bl-lg'}`;
+            if (isTyping) {
+                bubble.id = 'typing-indicator';
+                bubble.innerHTML = `<div class="flex items-center space-x-1"><span class="block w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: -0.3s;"></span><span class="block w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: -0.15s;"></span><span class="block w-2 h-2 bg-gray-500 rounded-full animate-bounce"></span></div>`;
+            } else {
+                bubble.textContent = text;
+            }
+            wrapper.appendChild(bubble);
+            messagesContainer.appendChild(wrapper);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        };
+        // Simulasi respon AI
+        const getGeminiResponse = (query) => {
+            return new Promise(resolve => setTimeout(() => {
+                const lowerQuery = query.toLowerCase();
+                let response = "Maaf, saya belum paham. Coba tanyakan tentang artikel Laravel atau Docker.";
+                if (lowerQuery.includes("laravel")) response = "Artikel Laravel kami adalah panduan yang bagus untuk pemula, mencakup pembuatan aplikasi CRUD dari awal hingga akhir.";
+                if (lowerQuery.includes("docker")) response = "Tentu, artikel Docker kami menjelaskan konsep dasar containerization yang sangat penting untuk DevOps modern.";
+                resolve(response);
+            }, 1500));
+        };
+        if (chatButton) chatButton.addEventListener('click', toggleChatWindow);
+        if (closeChatButton) closeChatButton.addEventListener('click', toggleChatWindow);
+        if (chatForm) {
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userInput = chatInput.value.trim();
+                if (!userInput) return;
+                appendMessage(userInput, "user");
+                chatInput.value = "";
+                appendMessage("", "ai", true);
+                const aiResponse = await getGeminiResponse(userInput);
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) typingIndicator.parentElement.remove();
+                appendMessage(aiResponse, "ai");
+            });
+        }
+    });
+    </script>
+</body>
+</html>
